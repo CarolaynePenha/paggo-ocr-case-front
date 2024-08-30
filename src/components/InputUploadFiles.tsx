@@ -2,11 +2,14 @@ import { Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import axios from "axios";
+import { InputUploadFilesParamns } from "@/types";
 
-type InputUploadFilesParamns = {
-  label: string;
-};
-export default function InputUploadFiles({ label }: InputUploadFilesParamns) {
+export default function InputUploadFiles({
+  label,
+  setUploadState,
+  uploadStates,
+  setTableData,
+}: InputUploadFilesParamns) {
   const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
     clipPath: "inset(50%)",
@@ -20,9 +23,13 @@ export default function InputUploadFiles({ label }: InputUploadFilesParamns) {
   });
   const VisuallyButton = styled(Button)({
     backgroundColor: "#2c00cc",
+    height: "40px",
+    width: "150px",
   });
+
   async function post(event: React.ChangeEvent<HTMLInputElement>) {
     event.preventDefault();
+    setUploadState(uploadStates.send);
     try {
       const invoice = event.target.files?.[0];
       if (invoice) {
@@ -34,20 +41,26 @@ export default function InputUploadFiles({ label }: InputUploadFilesParamns) {
           headers: { "Content-Type": invoice.type },
         });
 
+        setUploadState(uploadStates.ocrProcessing);
+
         const { data: ocrResponse } = await axios.post("/api/send-to-ocr", {
           uniqueName: data.uniqueName,
         });
+
+        setTableData(ocrResponse);
         console.log("ocrResponse: ", ocrResponse);
+        setUploadState(uploadStates.done);
       }
     } catch (err: any) {
       console.log(err.response);
+      setUploadState(uploadStates.wait);
       alert("Algo deu errado, tente novamente");
     }
   }
 
   return (
-    <div className="flex flex-col justify-center items-center  h-fit">
-      <p>{label}</p>
+    <div className="flex flex-col justify-center items-center  h-fit pb-6">
+      <p className="pb-3 text-[#A33E00]">{label}</p>
       <VisuallyButton
         // @ts-ignore:next-line
         component="label"

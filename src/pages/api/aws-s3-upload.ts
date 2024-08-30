@@ -13,7 +13,8 @@ export default async function handler(
     const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
     const s3BucketName = process.env.AWS_S3_BUCKET_NAME;
     const uniqueName =
-      (req.query.fileName as string).replace("s", "-") + Date.now().toString();
+      (req.query.fileName as string).replace(/\s+/g, "-") +
+      Date.now().toString();
     if (!accessKeyId || !secretAccessKey || !s3BucketName || !region) {
       throw new Error("AWS credentials invalid");
     }
