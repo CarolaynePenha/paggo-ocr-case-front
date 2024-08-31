@@ -3,6 +3,7 @@ import { styled } from "@mui/material/styles";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import axios from "axios";
 import { InputUploadFilesParamns } from "@/types";
+import { alert } from "@/utils/alerts";
 
 export default function InputUploadFiles({
   label,

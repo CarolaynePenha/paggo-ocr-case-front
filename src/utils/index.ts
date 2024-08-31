@@ -1,4 +1,4 @@
-import { BankInfo, CompanyData, Invoice, TranslationInvoiceMap } from "@/types";
+import { BankInfo, CompanyData, Invoice } from "@/types";
 
 export function generateKeyValueArray(
   translationMap: any,
