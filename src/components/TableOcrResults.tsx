@@ -46,7 +46,7 @@ export default function TableOcrResults({ extractedInfos }: DataTableParams) {
     translationBankInfoMap,
     extractedInfos.bankInfo
   );
-  console.log("bankInfoArray: ", bankInfoArray);
+
   const payerArray = generateKeyValueArray(
     translationCompanyMap,
     extractedInfos.payerData

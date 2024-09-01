@@ -34,7 +34,6 @@ export default function InputUploadFiles({
       "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
   });
   const { data: session } = useSession();
-  console.log("session: ", session);
 
   async function post(event: React.ChangeEvent<HTMLInputElement>) {
     event.preventDefault();
@@ -84,7 +83,6 @@ export default function InputUploadFiles({
         <VisuallyHiddenInput
           type="file"
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            console.log(event.target.files);
             post(event);
           }}
           multiple

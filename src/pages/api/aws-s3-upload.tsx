@@ -8,7 +8,6 @@ export default async function handler(
 ) {
   try {
     const region = process.env.AWS_REGION;
-    console.log("region: ", region);
     const accessKeyId = process.env.AWS_KEY_ID;
     const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
     const s3BucketName = process.env.AWS_S3_BUCKET_NAME;
