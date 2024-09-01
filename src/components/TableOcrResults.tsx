@@ -7,6 +7,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { generateKeyValueArray } from "@/utils";
 import { DataTableParams } from "@/types";
+import TableCellRow from "./TableCellRow";
 
 export default function TableOcrResults({ extractedInfos }: DataTableParams) {
   if (typeof extractedInfos === "string") {
@@ -36,6 +37,7 @@ export default function TableOcrResults({ extractedInfos }: DataTableParams) {
     account: "Conta",
     pixKey: "Chave Pix",
   };
+  delete extractedInfos.invoice.imageName;
   const invoiceArray = generateKeyValueArray(
     translationInvoiceMap,
     extractedInfos.invoice
@@ -44,6 +46,7 @@ export default function TableOcrResults({ extractedInfos }: DataTableParams) {
     translationBankInfoMap,
     extractedInfos.bankInfo
   );
+  console.log("bankInfoArray: ", bankInfoArray);
   const payerArray = generateKeyValueArray(
     translationCompanyMap,
     extractedInfos.payerData
@@ -53,98 +56,55 @@ export default function TableOcrResults({ extractedInfos }: DataTableParams) {
     extractedInfos.receiverData
   );
   return (
-    <TableContainer className="w-[80vw]" component={Paper}>
+    <TableContainer
+      className="w-[80vw] h-[70vh] overflow-y-auto bg-white shadow-md rounded-lg"
+      component={Paper}
+    >
       <Table>
         <TableBody>
           {invoiceArray.map((row, index) => (
-            <TableRow key={index}>
-              <TableCell>
-                <p className="font-bold">{row.newKey}</p>
-              </TableCell>
-              <TableCell>
-                <p className="max-h-[100px] overflow-auto">{row.value}</p>
-              </TableCell>
-            </TableRow>
+            <TableCellRow key={index} value={row.value} newKey={row.newKey} />
           ))}
-          <TableRow>
-            <TableCell
-              style={{
-                backgroundColor: "#C3CBCC",
-              }}
-            ></TableCell>
-            <TableCell
-              style={{
-                backgroundColor: "#C3CBCC",
-              }}
-            >
-              <h1 className="font-bold text-[15px]">
+          <TableRow className="bg-gray-200">
+            <TableCell colSpan={2} className="p-4">
+              <h1 className="font-bold text-gray-700 text-lg">
                 Informações do Emissor/Prestador
               </h1>
             </TableCell>
           </TableRow>
           {receiverArray.map((row, index) => (
-            <TableRow key={index}>
-              <TableCell>
-                <p className="font-bold">{row.newKey}</p>
-              </TableCell>
-              <TableCell>{row.value}</TableCell>
-            </TableRow>
+            <TableCellRow key={index} value={row.value} newKey={row.newKey} />
           ))}
-          {extractedInfos.bankInfo ? (
+          {bankInfoArray.length ? (
             <>
-              <TableRow>
-                <TableCell
-                  style={{
-                    backgroundColor: "#C3CBCC",
-                  }}
-                ></TableCell>
-                <TableCell
-                  style={{
-                    backgroundColor: "#C3CBCC",
-                  }}
-                >
-                  <h1 className="font-bold text-[15px]">
+              <TableRow className="bg-gray-200">
+                <TableCell colSpan={2} className="p-4">
+                  <h1 className="font-bold text-gray-700 text-lg">
                     Informações para pagamento
                   </h1>
                 </TableCell>
               </TableRow>
               {bankInfoArray.map((row, index) => (
-                <TableRow key={index}>
-                  <TableCell>
-                    <p className="font-bold">{row.newKey}</p>
-                  </TableCell>
-                  <TableCell>{row.value}</TableCell>
-                </TableRow>
+                <TableCellRow
+                  key={index}
+                  value={row.value}
+                  newKey={row.newKey}
+                />
               ))}
             </>
           ) : (
-            ""
+            <></>
           )}
-          <TableRow>
-            <TableCell
-              style={{
-                backgroundColor: "#C3CBCC",
-              }}
-            ></TableCell>
-            <TableCell
-              style={{
-                backgroundColor: "#C3CBCC",
-              }}
-            >
-              <h1 className="font-bold text-[15px]">
+          <TableRow className="bg-gray-200">
+            <TableCell colSpan={2} className="p-4">
+              <h1 className="font-bold text-gray-700 text-lg">
                 Informações do Tomador/Remitente
               </h1>
-            </TableCell>{" "}
+            </TableCell>
           </TableRow>
+
           {payerArray.map((row, index) => (
-            <TableRow key={index}>
-              <TableCell style={{ maxHeight: 40, overflow: "hidden" }}>
-                <p className="font-bold">{row.newKey}</p>
-              </TableCell>
-              <TableCell style={{ maxHeight: 40, overflow: "hidden" }}>
-                {row.value}
-              </TableCell>
-            </TableRow>
+            <TableCellRow key={index} value={row.value} newKey={row.newKey} />
           ))}
         </TableBody>
       </Table>

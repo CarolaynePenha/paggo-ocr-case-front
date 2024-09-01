@@ -55,13 +55,13 @@ export default function InputUploadFiles({
     } catch (err: any) {
       console.log(err.response);
       setUploadState(uploadStates.wait);
-      alert("Algo deu errado, tente novamente");
+      await alert("Algo deu errado, tente novamente");
     }
   }
 
   return (
     <div className="flex flex-col justify-center items-center  h-fit pb-6">
-      <p className="pb-3 text-[#A33E00]">{label}</p>
+      <p className="text-3xl font-bold text-gray-800 mb-6">{label}</p>
       <VisuallyButton
         // @ts-ignore:next-line
         component="label"

@@ -4,12 +4,12 @@ export function generateKeyValueArray(
   translationMap: any,
   obj?: Invoice | CompanyData | BankInfo
 ) {
-  if (!obj) {
+  if (!obj || Object.values(obj).every((value) => !value)) {
     return [];
   }
   const array = Object.entries(obj).map(([key, value]) => {
     const newKey = translationMap[key];
-    return { newKey, value: String(value) };
+    return { newKey, value: value ? String(value) : "-" };
   });
   return array;
 }

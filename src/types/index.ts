@@ -21,7 +21,7 @@ export type InputUploadFilesParamns = {
 export type Invoice = {
   description?: string;
   imageLink: string;
-  imageName: string;
+  imageName?: string;
   issuanceDate?: string;
   netAmount?: number;
   number?: string;
@@ -65,4 +65,9 @@ export type TranslationInvoiceMap = {
   number?: string;
   textRaw: string;
   totalAmount?: string;
+};
+
+export type TableCellRowParams = {
+  value: string | null;
+  newKey: string;
 };
