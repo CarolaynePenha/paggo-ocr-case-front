@@ -7,9 +7,7 @@ export default async function handler(
   const URL = `${process.env.REACT_APP_API_URL}/ocr`;
 
   try {
-    const uniqueName = req.body;
-    console.log("uniqueName: ", uniqueName);
-    const { data } = await axios.post(URL, uniqueName);
+    const { data } = await axios.post(URL, req.body);
 
     return res.status(201).send(data);
   } catch (err: any) {

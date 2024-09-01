@@ -4,6 +4,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import axios from "axios";
 import { InputUploadFilesParamns } from "@/types";
 import { alert } from "@/utils/alerts";
+import { useSession } from "next-auth/react";
 
 export default function InputUploadFiles({
   label,
@@ -26,7 +27,14 @@ export default function InputUploadFiles({
     backgroundColor: "#2c00cc",
     height: "40px",
     width: "150px",
+    borderRadius: "8px",
+    color: "#ffffff",
+    fontWeight: "600",
+    boxShadow:
+      "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
   });
+  const { data: session } = useSession();
+  console.log("session: ", session);
 
   async function post(event: React.ChangeEvent<HTMLInputElement>) {
     event.preventDefault();
@@ -46,6 +54,8 @@ export default function InputUploadFiles({
 
         const { data: ocrResponse } = await axios.post("/api/send-to-ocr", {
           uniqueName: data.uniqueName,
+          userName: session?.user?.name,
+          email: session?.user?.email,
         });
 
         setTableData(ocrResponse);
