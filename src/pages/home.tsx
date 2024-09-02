@@ -33,6 +33,9 @@ export default function Home() {
             <div className="text-center">
               <InputUploadFiles
                 label={"Faça upload da imagem da sua nota fiscal."}
+                subtitle={
+                  "Apenas arquivos de imagem são permitidos (formatos .jpg, .png, etc.)"
+                }
                 setUploadState={setUploadState}
                 uploadStates={uploadStates}
                 setTableData={setTableData}
@@ -69,6 +72,9 @@ export default function Home() {
           <div className="mb-10">
             <InputUploadFiles
               label={"Faça upload de outra imagem de nota fiscal."}
+              subtitle={
+                "Apenas arquivos de imagem são permitidos (formatos .jpg, .png, etc.)"
+              }
               setUploadState={setUploadState}
               uploadStates={uploadStates}
               setTableData={setTableData}

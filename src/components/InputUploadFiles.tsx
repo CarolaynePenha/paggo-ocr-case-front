@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 
 export default function InputUploadFiles({
   label,
+  subtitle,
   setUploadState,
   uploadStates,
   setTableData,
@@ -70,7 +71,10 @@ export default function InputUploadFiles({
 
   return (
     <div className="flex flex-col justify-center items-center  h-fit pb-6">
-      <p className="text-3xl font-bold text-gray-800 mb-6">{label}</p>
+      <div className="mb-6">
+        <p className="text-3xl font-bold text-gray-800">{label}</p>
+        <p className="mt-2 text-gray-600">{subtitle}</p>
+      </div>
       <VisuallyButton
         // @ts-ignore:next-line
         component="label"

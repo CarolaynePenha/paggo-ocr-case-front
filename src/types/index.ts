@@ -13,6 +13,7 @@ export type UploadStates = {
 
 export type InputUploadFilesParamns = {
   label: string;
+  subtitle: string;
   setUploadState: SetUploadStateType;
   uploadStates: UploadStates;
   setTableData: SetTableData;
