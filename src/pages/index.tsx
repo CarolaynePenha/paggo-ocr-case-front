@@ -9,7 +9,7 @@ export default function Component() {
     <div className="h-screen flex justify-center items-center bg-gradient-to-b from-gray-200 to-gray-400">
       <div className="p-10 bg-white rounded-xl shadow-2xl border border-gray-200 flex flex-col items-center">
         <Image
-          src="/img/paggoLogo.svg" // Substitua pelo caminho da sua logo
+          src="/img/paggoLogo.svg"
           alt="Paggo Logo"
           width={100}
           height={100}
